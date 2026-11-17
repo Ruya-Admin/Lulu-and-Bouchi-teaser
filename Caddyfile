@@ -39,6 +39,14 @@
 	}
 	header @homepage Cache-Control "public, max-age=60, s-maxage=3600"
 
+	@artwork path_regexp ^/(lulu|bouchi)\.[0-9a-f]{16}\.webp$
+	header @artwork Cache-Control "public, max-age=31536000, immutable" {
+		match status 200 206 304
+	}
+
+	@icons path /favicon.ico /favicon-16x16.png /favicon-32x32.png /apple-touch-icon.png /icon-192.png
+	header @icons Cache-Control "public, max-age=86400"
+
 	root * .
 
 	# Handle static files
